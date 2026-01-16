@@ -25,11 +25,14 @@
 ```angular2html
 Assignment1/
 ├── src/
-│ ├── 
-│ ├── 
-│ └── 
+│ ├── common/
+│ ├── controller/
+│ ├── model/
+│ ├── service/
+│ ├── util/
+│ └── Application.java <- Run
 ├── README.md
-└──
+└── config.ini <- config file
 ```
 
 ---
@@ -37,6 +40,5 @@ Assignment1/
 ## ▶️ How to Compile and Run
 ### Compile
 ```bash
-javac *.java
-java Main
+
 ```

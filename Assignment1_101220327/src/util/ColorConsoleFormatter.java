@@ -26,10 +26,11 @@ public class ColorConsoleFormatter extends Formatter {
         };
 
         return String.format(
-                "%s%s [%s] %s%s%n",
+                "%s%s [%s][%s]%s%s%n",
                 color,
                 TIME_FORMAT.format(LocalDateTime.now()),
                 record.getLevel().getName(),
+                Thread.currentThread().getName(),
                 record.getMessage(),
                 RESET
         );
