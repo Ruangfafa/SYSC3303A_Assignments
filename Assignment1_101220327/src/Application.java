@@ -1,4 +1,6 @@
+import common.ConfigLoader;
 import common.Enums;
+import common.Constants.ApplicationCon;
 import controller.Assembler;
 import controller.Technician;
 import model.AssemblyTable;
@@ -7,18 +9,18 @@ import service.LoggerService;
 import java.util.logging.Logger;
 
 public class Application {
-    private static final Logger logger = LoggerService.getLogger(false);
+    private static final Logger logger = LoggerService.getLogger(ConfigLoader.getInstance().ifLogOutput());
 
     public static void main(String[] args) {
-        logger.info("Application starting...");
+        logger.info(ApplicationCon.L_START);
 
         AssemblyTable table = new AssemblyTable();
 
-        Thread assembler = new Thread(new Assembler(table), "Assembler");
+        Thread assembler = new Thread(new Assembler(table), ApplicationCon.ASSEMBLER);
 
-        Thread techFrame = new Thread(new Technician(table, Enums.ComponentType.FRAME), "Technician-FRAME");
-        Thread techPropulsion = new Thread(new Technician(table, Enums.ComponentType.PROPULSION), "Technician-PROPULSION");
-        Thread techFirmware = new Thread(new Technician(table, Enums.ComponentType.FIRMWARE), "Technician-FIRMWARE");
+        Thread techFrame = new Thread(new Technician(table, Enums.ComponentType.FRAME), ApplicationCon.TECH_FRAME);
+        Thread techPropulsion = new Thread(new Technician(table, Enums.ComponentType.PROPULSION), ApplicationCon.TECH_PROP);
+        Thread techFirmware = new Thread(new Technician(table, Enums.ComponentType.FIRMWARE), ApplicationCon.TECH_FIRM);
 
         assembler.start();
 
@@ -26,6 +28,6 @@ public class Application {
         techPropulsion.start();
         techFirmware.start();
 
-        logger.info("All threads started.");
+        logger.info(ApplicationCon.L_OVER);
     }
 }

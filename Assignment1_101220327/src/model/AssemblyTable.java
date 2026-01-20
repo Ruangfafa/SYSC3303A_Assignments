@@ -1,13 +1,15 @@
 package model;
 
+import common.ConfigLoader;
+import common.Constants.AssemblyTableCon;
 import common.Enums.ComponentType;
 import service.LoggerService;
 
 import java.util.logging.Logger;
 
 public class AssemblyTable {
-    private static final Logger logger = LoggerService.getLogger(false);
-    private static final int MAX_DRONES = 20;
+    private static final Logger logger = LoggerService.getLogger(ConfigLoader.getInstance().ifLogOutput());
+    private static final int MAX_DRONES = ConfigLoader.getInstance().getMaxDrones();
 
     boolean hasFrame, hasPropulsion, hasFirmware;
     public int dronesBuilt;
@@ -29,7 +31,7 @@ public class AssemblyTable {
 
         setComponent(c1);
         setComponent(c2);
-        logger.info("Components placed on table: " + c1 + ", " + c2);
+        logger.info(String.format(AssemblyTableCon.L_PLACED, c1, c2));
 
         notifyAll();
         return true;
@@ -55,7 +57,7 @@ public class AssemblyTable {
         hasFirmware = false;
 
         dronesBuilt++;
-        logger.info("[" + Thread.currentThread().getName() + "] " + "Drone assembled by " + technicianType + " | Total = " + dronesBuilt);
+        logger.info(String.format(AssemblyTableCon.L_ASSEMBLED, Thread.currentThread().getName(), technicianType, dronesBuilt));
 
         notifyAll();
         return true;
