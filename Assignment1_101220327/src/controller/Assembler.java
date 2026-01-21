@@ -1,14 +1,16 @@
 package controller;
 
+import common.ConfigLoader;
 import model.AssemblyTable;
 import common.Enums.ComponentType;
+import common.Constants.AssemblerCon;
 import service.LoggerService;
 
 import java.util.Random;
 import java.util.logging.Logger;
 
 public class Assembler implements Runnable {
-    private static final Logger logger = LoggerService.getLogger(false);
+    private static final Logger logger = LoggerService.getLogger(ConfigLoader.getInstance().ifLogOutput());
 
     private final AssemblyTable table;
     private final Random random = new Random();
@@ -19,13 +21,11 @@ public class Assembler implements Runnable {
 
     @Override
     public void run() {
-        logger.info("Assembler started.");
+        logger.info(AssemblerCon.L_START);
         while (!Thread.currentThread().isInterrupted()) {
             ComponentType[] pair = pickTwoComponents();
-            logger.info("Assembler placing components: " + pair[0] + ", " + pair[1]);
-
             if (!table.placeComponents(pair[0], pair[1])) {
-                logger.info("Assembly complete. Assembler exiting.");
+                logger.info(AssemblerCon.L_EXIT);
                 return;
             }
         }

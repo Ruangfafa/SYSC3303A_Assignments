@@ -21,47 +21,51 @@ public final class ConfigLoader {
     }
 
     private Properties loadConfig() {
-        Path configPath = baseDir.resolve("config.ini");
+        Path configPath = baseDir.resolve("config.properties");
         Properties props = new Properties();
 
         try (InputStream in = Files.newInputStream(configPath)) {
             props.load(in);
         } catch (Exception e) {
             throw new RuntimeException(
-                    "Failed to load config.ini at: " + configPath, e
+                    "Failed to load config.properties at: " + configPath, e
             );
         }
         return props;
     }
 
-    public Path getBaseDir() {
+    private Path getBaseDir() {
         return baseDir;
     }
 
-    public String getString(String key) {
+    private String getString(String key) {
         return config.getProperty(key);
     }
 
-    public String getString(String key, String defaultValue) {
+    private String getString(String key, String defaultValue) {
         return config.getProperty(key, defaultValue);
     }
 
-    public int getInt(String key) {
+    private int getInt(String key) {
         return Integer.parseInt(config.getProperty(key));
     }
 
-    public boolean getBoolean(String key) {
+    private boolean getBoolean(String key) {
         return Boolean.parseBoolean(config.getProperty(key));
     }
 
-    public Path getPath(String key) {
+    private Path getPath(String key) {
         return baseDir.resolve(config.getProperty(key));
+    }
+
+    public boolean ifLogOutput() {
+        return getBoolean("LOG_OUTPUT");
+    }
+    public int getMaxDrones() {
+        return getInt("MAX_DRONES");
     }
 }
 
 /*
 ConfigLoader config = ConfigLoader.getInstance();
-
-String timeZone = config.getString("TIME_ZONE");
-Path passwdFile = config.getPath("PASSWD_FILE");
  */

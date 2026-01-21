@@ -1,5 +1,7 @@
 package controller;
 
+import common.ConfigLoader;
+import common.Constants.TechnicianCon;
 import model.AssemblyTable;
 import common.Enums.ComponentType;
 import service.LoggerService;
@@ -7,7 +9,7 @@ import service.LoggerService;
 import java.util.logging.Logger;
 
 public class Technician implements Runnable {
-    private static final Logger logger = LoggerService.getLogger(false);
+    private static final Logger logger = LoggerService.getLogger(ConfigLoader.getInstance().ifLogOutput());
 
     private final AssemblyTable table;
     private final ComponentType type;
@@ -19,10 +21,10 @@ public class Technician implements Runnable {
 
     @Override
     public void run() {
-        logger.info("Technician started: " + type);
+        logger.info(String.format(TechnicianCon.L_START, type));
         while (!Thread.currentThread().isInterrupted()) {
             if (!table.assemble(type)) {
-                logger.info("[" + Thread.currentThread().getName() + "] Technician exiting.");
+                logger.info(String.format(TechnicianCon.L_EXIT, Thread.currentThread().getName()));
                 return;
             }
         }
