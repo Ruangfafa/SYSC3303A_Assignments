@@ -27,12 +27,15 @@ Assignment1/
 ├── src/
 │ ├── common/
 │ ├── controller/
+│ │ ├── Assembler.java <- ※
+│ │ └── Technician.java <- ※
 │ ├── model/
+│ │ └── AssemblyTable.java <- ※
 │ ├── service/
 │ ├── util/
 │ └── Application.java <- Run
 ├── README.md
-└── config.ini <- config file
+└── config.properties <- config file
 ```
 
 ---

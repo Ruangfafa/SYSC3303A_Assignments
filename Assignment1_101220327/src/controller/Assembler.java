@@ -9,16 +9,30 @@ import service.LoggerService;
 import java.util.Random;
 import java.util.logging.Logger;
 
+/**
+ * Producer thread responsible for placing components on the assembly table.
+ *
+ * The assembler repeatedly selects two different components at random and places them on the shared AssemblyTable until assembly is finished or the thread is interrupted.
+ */
 public class Assembler implements Runnable {
     private static final Logger logger = LoggerService.getLogger(ConfigLoader.getInstance().ifLogOutput());
 
     private final AssemblyTable table;
     private final Random random = new Random();
 
+    /**
+     * Creates a new assembler.
+     *
+     * @param table shared assembly table
+     */
     public Assembler(AssemblyTable table) {
         this.table = table;
     }
 
+    /**
+     * Main execution loop of the assembler thread.
+     * Continuously places random component pairs on the table until assembly is complete or the thread is interrupted.
+     */
     @Override
     public void run() {
         logger.info(AssemblerCon.L_START);
@@ -31,6 +45,11 @@ public class Assembler implements Runnable {
         }
     }
 
+    /**
+     * Randomly selects two different component types.
+     *
+     * @return an array containing two distinct component types
+     */
     private ComponentType[] pickTwoComponents() {
         ComponentType[] values = ComponentType.values();
         int i = random.nextInt(values.length);

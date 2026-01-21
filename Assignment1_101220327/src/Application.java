@@ -8,9 +8,18 @@ import service.LoggerService;
 
 import java.util.logging.Logger;
 
+/**
+ * Main class of the application.
+ * Initializes shared resources and starts all threads.
+ */
 public class Application {
     private static final Logger logger = LoggerService.getLogger(ConfigLoader.getInstance().ifLogOutput());
 
+    /**
+     * Starts the application.
+     *
+     * @param args command-line arguments
+     */
     public static void main(String[] args) {
         logger.info(ApplicationCon.L_START);
 
