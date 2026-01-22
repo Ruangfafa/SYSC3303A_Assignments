@@ -16,7 +16,7 @@ public class Application {
     private static final Logger logger = LoggerService.getLogger(ConfigLoader.getInstance().ifLogOutput());
 
     /**
-     * Starts the application.
+     * Starts the Threads.
      *
      * @param args command-line arguments
      */
