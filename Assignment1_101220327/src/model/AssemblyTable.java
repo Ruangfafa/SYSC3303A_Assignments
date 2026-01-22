@@ -78,7 +78,7 @@ public class AssemblyTable {
         hasFirmware = false;
 
         dronesBuilt++;
-        logger.info(String.format(AssemblyTableCon.L_ASSEMBLED, Thread.currentThread().getName(), technicianType, dronesBuilt));
+        logger.info(String.format(AssemblyTableCon.L_ASSEMBLED, technicianType, dronesBuilt));
 
         notifyAll();
         return true;

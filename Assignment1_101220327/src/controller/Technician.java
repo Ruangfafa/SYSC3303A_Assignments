@@ -39,7 +39,7 @@ public class Technician implements Runnable {
         logger.info(String.format(TechnicianCon.L_START, type));
         while (!Thread.currentThread().isInterrupted()) {
             if (!table.assemble(type)) {
-                logger.info(String.format(TechnicianCon.L_EXIT, Thread.currentThread().getName()));
+                logger.info(String.format(TechnicianCon.L_EXIT));
                 return;
             }
         }

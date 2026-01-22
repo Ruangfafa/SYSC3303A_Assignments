@@ -15,13 +15,13 @@ public final class Constants {
     public static final class AssemblyTableCon {
         public static final String
             L_PLACED = "Components placed on table: %s, %s",
-            L_ASSEMBLED = "[%s]Drone assembled by %s | Total = %s";
+            L_ASSEMBLED = "Drone assembled by %s | Total = %s";
         private AssemblyTableCon() {}
     }
     public static final class TechnicianCon {
         public static final String
             L_START = "Technician started: %s",
-            L_EXIT = "[%s] Technician exiting.";
+            L_EXIT = "Technician exiting.";
     }
     public static final class AssemblerCon {
         public static final String
