@@ -10,7 +10,9 @@
 ---
 
 ## 📖 Description
-
+- [SYSC3303A W26 A01 - Updated.pdf](resources/SYSC3303A%20W26%20A01%20-%20Updated.pdf)
+- ![Class Diagram](resources/Class%20Diagram.png)
+- ![Sequence Diagram](resources/Sequence%20Diagram.png)
 
 ---
 
@@ -22,7 +24,7 @@
 ---
 
 ## 📂 Project Structure
-```angular2html
+```
 Assignment1/
 ├── src/
 │ ├── common/
@@ -34,14 +36,7 @@ Assignment1/
 │ ├── service/
 │ ├── util/
 │ └── Application.java <- Run
+├── resources/
 ├── README.md
 └── config.properties <- config file
-```
-
----
-
-## ▶️ How to Compile and Run
-### Compile
-```bash
-
 ```
