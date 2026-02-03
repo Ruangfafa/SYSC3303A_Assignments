@@ -1,10 +1,13 @@
 package common;
 
 import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
+import java.util.logging.Level;
 
 public final class ConfigLoader {
     private static final ConfigLoader INSTANCE = new ConfigLoader();
@@ -64,11 +67,37 @@ public final class ConfigLoader {
         return getBoolean("LOG_OUTPUT");
     }
 
+    public Level getConsoleLevel() {
+        return Level.parse(getString("CONSOLE_LEVEL"));
+    }
+
+    public Level getFileLevel() {
+        return Level.parse(getString("FILE_LEVEL"));
+    }
+
+    public InetAddress getServerReceiveAddress(){
+        try {
+            return InetAddress.getByName(getString("SERVER_RECEIVE_ADDRESS"));
+        } catch (UnknownHostException e) {
+            return null;
+        }
+
+    }
+
     public int getServerReceivePort() {
         return getInt("SERVER_RECEIVE_PORT");
     }
-}
 
-/*
-ConfigLoader config = ConfigLoader.getInstance();
- */
+    public InetAddress getIntermediateReceiveAddress(){
+        try {
+            return InetAddress.getByName(getString("INTERMEDIATE_RECEIVE_ADDRESS"));
+        } catch (UnknownHostException e) {
+            return null;
+        }
+
+    }
+
+    public int getIntermediateReceivePort() {
+        return getInt("INTERMEDIATE_RECEIVE_PORT");
+    }
+}

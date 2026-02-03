@@ -1,34 +1,14 @@
-import common.ConfigLoader;
+package service;
+
 import common.enums.CommandType;
 import model.GameState;
-import service.LoggerService;
-import service.Udp;
 
-import java.net.DatagramPacket;
-import java.util.Arrays;
 import java.util.logging.Logger;
 
-public class ServerApplication {
-    private static final Logger logger = LoggerService.getLogger(ConfigLoader.getInstance().ifLogOutput());
+public class ServerAlgorithm {
+    private static final Logger logger = LoggerService.getLogger();
 
-    public static void main(String[] args) {
-        logger.info("ServerApplication start");
-        Udp udp = new Udp();
-        GameState gameState = new GameState();
-
-        while (true) {
-            DatagramPacket packet = udp.receive();
-            if (packet == null) continue;
-
-            String[] receive = new String(packet.getData(), 0, packet.getLength()).split(":");
-            logger.info("Received: " + Arrays.toString(receive));
-
-            String response = algorithm(gameState, receive);
-            udp.send(response, packet);
-        }
-    }
-
-    private static String algorithm(GameState gameState, String[] receive) {
+    public static String processCommand(GameState gameState, String[] receive) {
         if (receive.length == 0 || receive[0].isEmpty()) {
             return "ERROR:UNSUPPORTED_COMMAND";
         }
@@ -41,7 +21,7 @@ public class ServerApplication {
                     return "ERROR:BAD_JOIN";
                 }
 
-                String name = receive[1];
+                String name = receive[1].length() > 16 ? receive[1].substring(0, 16) : receive[1];
                 int id = gameState.addNewPlayer(name).getId();
                 return "JOINED:" + id;
             }
@@ -86,4 +66,6 @@ public class ServerApplication {
             }
         }
     }
+
+
 }
