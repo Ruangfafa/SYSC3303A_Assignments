@@ -1,5 +1,6 @@
 package service;
 
+import common.ConfigLoader;
 import util.ColorConsoleFormatter;
 import util.DailyFileHandler;
 
@@ -15,6 +16,10 @@ import java.util.logging.Logger;
  */
 public class LoggerService {
 
+    private static final boolean ENABLE_FILE = ConfigLoader.getInstance().ifLogOutput();
+    private static final Level CONSOLE_LEVEL = ConfigLoader.getInstance().getConsoleLevel();
+    private static final Level FILE_LEVEL = ConfigLoader.getInstance().getFileLevel();
+
     private static Logger logger;
 
     /**
@@ -24,18 +29,18 @@ public class LoggerService {
      * @param enableFile whether file logging should be enabled
      * @return shared logger instance
      */
-    public static synchronized Logger getLogger(boolean enableFile) {
+    public static Logger getLogger(boolean enableFile, Level consoleLogLevel, Level fileLogLevel) {
         if (logger != null) {
             return logger;
         }
 
         logger = Logger.getLogger("GlobalLogger");
         logger.setUseParentHandlers(false);
-        logger.setLevel(Level.INFO);
+        logger.setLevel(Level.ALL);
 
         //Console Handler
         ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setLevel(Level.ALL);
+        consoleHandler.setLevel(consoleLogLevel);
         consoleHandler.setFormatter(new ColorConsoleFormatter());
         logger.addHandler(consoleHandler);
 
@@ -43,7 +48,7 @@ public class LoggerService {
         if (enableFile) {
             try {
                 Handler fileHandler = new DailyFileHandler("logs");
-                fileHandler.setLevel(Level.ALL);
+                fileHandler.setLevel(fileLogLevel);
                 logger.addHandler(fileHandler);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -51,5 +56,9 @@ public class LoggerService {
         }
 
         return logger;
+    }
+
+    public static Logger getLogger() {
+        return getLogger(ENABLE_FILE, CONSOLE_LEVEL, FILE_LEVEL);
     }
 }

@@ -1,7 +1,5 @@
 package service;
 
-import common.ConfigLoader;
-
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -9,11 +7,10 @@ import java.net.SocketException;
 import java.util.logging.Logger;
 
 public class Udp {
-    private static final Logger logger = LoggerService.getLogger(ConfigLoader.getInstance().ifLogOutput());
+    private static final Logger logger = LoggerService.getLogger();
     private DatagramSocket sendSocket, receiveSocket;
 
-    public Udp() {
-        int port = ConfigLoader.getInstance().getServerReceivePort();
+    public Udp(int port) {
         try {
             receiveSocket = new DatagramSocket(port);
         } catch (SocketException e) {
@@ -21,10 +18,6 @@ public class Udp {
             e.printStackTrace();
             System.exit(1);
         }
-    }
-
-    public DatagramSocket getReceiveSocket() {
-        return receiveSocket;
     }
 
     public DatagramPacket receive() {
@@ -53,23 +46,14 @@ public class Udp {
         }
     }
 
-    public void send(String msg, DatagramPacket request) {
+    public void send(DatagramPacket packet) {
         try {
-            byte[] data = msg.getBytes();
-
-            DatagramPacket sendPacket = new DatagramPacket(
-                    data,
-                    data.length,
-                    request.getAddress(),
-                    request.getPort()
-            );
-
             if (sendSocket == null) {
                 sendSocket = new DatagramSocket();
             }
 
-            sendSocket.send(sendPacket);
-            logger.info("Sent: " + msg);
+            sendSocket.send(packet);
+            logger.info("Packet sent to: " + packet.getAddress() + ":" + packet.getPort());
 
         } catch (Exception e) {
             logger.warning("UDP send failed");
