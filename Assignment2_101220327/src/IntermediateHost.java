@@ -1,13 +1,12 @@
 import common.ConfigLoader;
 import service.LoggerService;
-import service.Udp;
+import service.UdpSocket;
 
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
-import static util.DiagramPacket.decodePacketBytes;
 import static util.DiagramPacket.getPacket;
 
 public class IntermediateHost {
@@ -17,28 +16,39 @@ public class IntermediateHost {
 
     public static void main(String[] args) {
         logger.info("IntermediateHost start");
-        int port = ConfigLoader.getInstance().getIntermediateReceivePort();
-        Udp udp = new Udp(port);
+        int receivePort = ConfigLoader.getInstance().getIntermediateReceivePort();
+        InetAddress clientAddress = null, toAddress;
+        int clientPort = 0, toPort;
+        UdpSocket receiveSocket = new UdpSocket(receivePort);
+        UdpSocket sendSocket = new UdpSocket();
 
         while (true) {
-            DatagramPacket packet = udp.receive();
+            DatagramPacket packet = receiveSocket.receive();
             if (packet == null) continue;
 
             InetAddress resAddress = packet.getAddress();
             int resPort = packet.getPort();
 
-            if (resAddress == SERVER_ADDRESS && resPort == SERVER_PORT){
-                DatagramPacket clientPacket = decodePacketBytes(packet.getData());
-                String[] receive = new String(clientPacket.getData(), 0, clientPacket.getLength()).split(":");
-                logger.info("Received: " + Arrays.toString(receive) + ", from Server(" + resAddress + ":" + resPort + ")");
+            String receive = new String(packet.getData(), 0, packet.getLength());
+            String[] splitReceive = receive.split(":");
+
+            if (resAddress.equals(SERVER_ADDRESS) && resPort == SERVER_PORT){
+                logger.info("Received: " + Arrays.toString(splitReceive) + ", from Server(" + resAddress + ":" + resPort + ")");
+
+                toAddress = clientAddress;
+                toPort = clientPort;
             }
             else {
-                String[] receive = new String(packet.getData(), 0, packet.getLength()).split(":");
-                logger.info("Received: " + Arrays.toString(receive) + ", from Client(" + resAddress + ":" + resPort + ")");
+                clientAddress = packet.getAddress();
+                clientPort = packet.getPort();
+                logger.info("Received: " + Arrays.toString(splitReceive) + ", from Client(" + resAddress + ":" + resPort + ")");
 
-                DatagramPacket intermediatePacket = getPacket(packet, SERVER_ADDRESS, SERVER_PORT);
-                udp.send(intermediatePacket);
+                toAddress = SERVER_ADDRESS;
+                toPort = SERVER_PORT;
             }
+
+            DatagramPacket intermediatePacket = getPacket(receive, toAddress, toPort);
+            sendSocket.send(intermediatePacket);
         }
     }
 }

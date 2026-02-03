@@ -6,11 +6,11 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.logging.Logger;
 
-public class Udp {
+public class UdpSocket {
     private static final Logger logger = LoggerService.getLogger();
     private DatagramSocket sendSocket, receiveSocket;
 
-    public Udp(int port) {
+    public UdpSocket(int port) {
         try {
             receiveSocket = new DatagramSocket(port);
         } catch (SocketException e) {
@@ -18,6 +18,10 @@ public class Udp {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    public UdpSocket() {
+
     }
 
     public DatagramPacket receive() {
@@ -52,7 +56,21 @@ public class Udp {
                 sendSocket = new DatagramSocket();
             }
 
+            if (receiveSocket == null) {
+                receiveSocket = sendSocket;
+            }
+
             sendSocket.send(packet);
+            logger.info("Packet sent to: " + packet.getAddress() + ":" + packet.getPort());
+
+        } catch (Exception e) {
+            logger.warning("UDP send failed");
+        }
+    }
+
+    public void sendBack(DatagramPacket packet) {
+        try {
+            receiveSocket.send(packet);
             logger.info("Packet sent to: " + packet.getAddress() + ":" + packet.getPort());
 
         } catch (Exception e) {

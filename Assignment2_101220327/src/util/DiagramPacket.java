@@ -46,21 +46,21 @@ public class DiagramPacket {
         );
     }
 
-    public static DatagramPacket getPacket(DatagramPacket innerPacket, InetAddress address, int port) {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        DataOutputStream dos = new DataOutputStream(bos);
-
-        try {
-            dos.writeUTF(innerPacket.getAddress().getHostAddress());
-            dos.writeInt(innerPacket.getPort());
-            byte[] innerData = Arrays.copyOf(innerPacket.getData(), innerPacket.getLength());
-            dos.writeInt(innerData.length);
-            dos.write(innerData);
-        } catch (IOException e) {
-            logger.warning("Error decoding packet bytes");
-        }
-
-        byte[] outerData = bos.toByteArray();
-        return new DatagramPacket(outerData, outerData.length, address, port);
-    }
+//    public static DatagramPacket getPacket(DatagramPacket innerPacket, InetAddress address, int port) {
+//        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//        DataOutputStream dos = new DataOutputStream(bos);
+//
+//        try {
+//            dos.writeUTF(innerPacket.getAddress().getHostAddress());
+//            dos.writeInt(innerPacket.getPort());
+//            byte[] innerData = Arrays.copyOf(innerPacket.getData(), innerPacket.getLength());
+//            dos.writeInt(innerData.length);
+//            dos.write(innerData);
+//        } catch (IOException e) {
+//            logger.warning("Error decoding packet bytes");
+//        }
+//
+//        byte[] outerData = bos.toByteArray();
+//        return new DatagramPacket(outerData, outerData.length, address, port);
+//    }
 }
