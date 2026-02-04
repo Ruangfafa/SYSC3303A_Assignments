@@ -21,6 +21,7 @@ public class Server {
         int port = ConfigLoader.getInstance().getServerReceivePort();
         UdpSocket udpSocket = new UdpSocket(port);
         GameState gameState = new GameState();
+        System.out.println("Battle Royale Server started on port " + port + "\n");
 
         while (true) {
             DatagramPacket intermediatePacket = udpSocket.receive();
@@ -28,13 +29,25 @@ public class Server {
 
             InetAddress intermediateAddress = intermediatePacket.getAddress();
             int intermediatePort = intermediatePacket.getPort();
-            String[] receive = new String(intermediatePacket.getData(),0,intermediatePacket.getLength()).split(":");
+            String receive = new String(intermediatePacket.getData(),0,intermediatePacket.getLength());
+            String[] splitReceive = receive.split(":");
 
-            logger.info("Received: " + Arrays.toString(receive) + "From: [Intermediate: " + intermediateAddress + ":" + intermediatePort + "]");
+            logger.info("Received: " + Arrays.toString(splitReceive) + "From: [Intermediate: " + intermediateAddress + ":" + intermediatePort + "]");
+            System.out.println("Server: received:\n" +
+                    "From host: " + intermediateAddress + "\n" +
+                    "From host port: " + intermediatePort + "\n" +
+                    "Length: " + intermediatePacket.getLength() + "\n" +
+                    "Containing: " + receive + "\n");
 
-            String response = processCommand(gameState, receive);
+            String response = processCommand(gameState, splitReceive);
 
             DatagramPacket respondIntermediatePacket = getPacket(response, INTERMEDIATE_ADDRESS, INTERMEDIATE_PORT);
+            System.out.println("Server: sending response:\n" +
+                    "To host: " + INTERMEDIATE_ADDRESS + "\n" +
+                    "To host port: " + INTERMEDIATE_PORT + "\n" +
+                    "Length: " + respondIntermediatePacket.getLength() + "\n" +
+                    "Containing: " + response + "\n");
+
             udpSocket.sendBack(respondIntermediatePacket);
         }
     }
