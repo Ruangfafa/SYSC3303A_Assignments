@@ -18,7 +18,6 @@ public class Client {
     private static final InetAddress INTERMEDIATE_ADDRESS = ConfigLoader.getInstance().getIntermediateReceiveAddress();
     private static final int INTERMEDIATE_PORT = ConfigLoader.getInstance().getIntermediateReceivePort();
     private static final Scanner sc = new Scanner(System.in);
-    private static boolean clientOn = true;
     private static int playerId;
     private static DatagramPacket packet;
     private static final UdpSocket udpSocket = new UdpSocket();
@@ -29,17 +28,17 @@ public class Client {
 
         playerJoin();
 
-        while (clientOn) {
+        while (true) {
             String command = nextRequest();
             if (command == null) continue;
-
-            packet = getPacket(command, INTERMEDIATE_ADDRESS, INTERMEDIATE_PORT);
-            udpSocket.send(packet);
-
             if (command.equals("QUIT")) {
                 System.out.println("Client closed.");
                 System.exit(0);
             }
+
+            packet = getPacket(command, INTERMEDIATE_ADDRESS, INTERMEDIATE_PORT);
+            udpSocket.send(packet);
+
 
             System.out.println("\nClient: sent: \n" +
                     "To host: local" + INTERMEDIATE_ADDRESS + "\n" +
@@ -129,10 +128,6 @@ public class Client {
 
             case STATE ->
                 System.out.println("Game State: " + splitReceive[1]);
-
-            case BYE ->   {
-                clientOn = false;
-            }
         }
         System.out.println("Commands: MOVE dx dy | PICKUP lootId | STATE | QUIT");
     }
