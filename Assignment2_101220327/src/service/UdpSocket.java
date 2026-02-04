@@ -6,10 +6,21 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.logging.Logger;
 
+/**
+ * Just provides simple methods to send and receive UDP packets
+ */
 public class UdpSocket {
     private static final Logger logger = LoggerService.getLogger();
     private DatagramSocket sendSocket, receiveSocket;
 
+    /**
+     * Constructs a UdpSocket that listens on a specific port.
+     *
+     * This constructor initializes the receive socket and binds it
+     * to the given UDP port.
+     *
+     * @param port UDP port number to listen on
+     */
     public UdpSocket(int port) {
         try {
             receiveSocket = new DatagramSocket(port);
@@ -20,10 +31,21 @@ public class UdpSocket {
         }
     }
 
+    /**
+     * Constructs a UdpSocket without binding to a port.
+     *
+     * This constructor is typically used when the socket
+     * will only be used for sending packets.
+     */
     public UdpSocket() {
 
     }
 
+    /**
+     * Wait until a UDP packet is received.
+     *
+     * @return the received DatagramPacket, or null if an error occurs
+     */
     public DatagramPacket receive() {
         try {
             byte[] data = new byte[1024];
@@ -50,6 +72,12 @@ public class UdpSocket {
         }
     }
 
+    /**
+     * Sends a UDP packet using a dedicated sending socket.
+     * If the sending socket has not been initialized yet, this method will create it automatically.
+     *
+     * @param packet the DatagramPacket to be sent
+     */
     public void send(DatagramPacket packet) {
         try {
             if (sendSocket == null) {
@@ -68,6 +96,12 @@ public class UdpSocket {
         }
     }
 
+    /**
+     * Sends a UDP packet back using the receive socket.
+     * This method is typically used to reply to a packet that was just received, ensuring the response is sent from the same local port.
+     *
+     * @param packet the DatagramPacket to be sent back
+     */
     public void sendBack(DatagramPacket packet) {
         try {
             receiveSocket.send(packet);

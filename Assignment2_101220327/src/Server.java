@@ -11,11 +11,19 @@ import java.util.logging.Logger;
 
 import static util.DiagramPacket.getPacket;
 
+/**
+ *The server receives UDP packets, parses commands, updates the game state, and sends responses back through the intermediate host.
+ */
 public class Server {
     private static final Logger logger = LoggerService.getLogger();
     private static final InetAddress INTERMEDIATE_ADDRESS = ConfigLoader.getInstance().getIntermediateReceiveAddress();
     private static final int INTERMEDIATE_PORT = ConfigLoader.getInstance().getIntermediateReceivePort();
 
+    /**
+     * Entry point of the server application.
+     *
+     * @param args command-line arguments, not used
+     */
     public static void main(String[] args) {
         logger.info("Server start");
         int port = ConfigLoader.getInstance().getServerReceivePort();
@@ -52,6 +60,14 @@ public class Server {
         }
     }
 
+    /**
+     * Processes a single command received from a client.
+     * This method parses the command type, validates arguments, updates the game state when necessary, and returns a protocol-compliant response string.
+     *
+     * @param gameState the shared game state instance
+     * @param receive the split command received from the client
+     * @return response string to be sent back to the client
+     */
     private static String processCommand(GameState gameState, String[] receive) {
         if (receive.length == 0 || receive[0].isEmpty()) {
             return "ERROR:UNSUPPORTED_COMMAND";
