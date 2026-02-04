@@ -10,9 +10,13 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import static java.lang.Thread.sleep;
 import static util.DiagramPacket.getPacket;
 
+/**
+ * The client reads user input from the console, formats requests
+ * according to the protocol, sends them via UDP, and prints
+ * server responses.
+ */
 public class Client {
     private static final Logger logger = LoggerService.getLogger();
     private static final InetAddress INTERMEDIATE_ADDRESS = ConfigLoader.getInstance().getIntermediateReceiveAddress();
@@ -23,6 +27,11 @@ public class Client {
     private static final UdpSocket udpSocket = new UdpSocket();
     private static String request;
 
+    /**
+     * Entry point of the client application.
+     *
+     * @param args command-line arguments, not used
+     */
     public static void main(String[] args) {
         logger.info("Client Start");
 
@@ -51,6 +60,12 @@ public class Client {
         }
     }
 
+    /**
+     * Reads the next command from user input and converts it
+     * into a protocol-compliant request string.
+     *
+     * @return formatted request string, or null if input is invalid
+     */
     private static String nextRequest() {
         request = sc.nextLine();
         String[] splitRequest = request.split(" ");
@@ -79,6 +94,10 @@ public class Client {
         }
     }
 
+    /**
+     * Sends a JOIN request to the server and waits for a response.
+     *
+     */
     private static void playerJoin() {
         System.out.print("Client started. Socket on random port.\n" +
                 "Enter your player name: ");
@@ -97,6 +116,13 @@ public class Client {
         processReceive();
     }
 
+    /**
+     * Processes a received UDP packet from the server.
+     * - Parses the response message
+     * - Logs the received data
+     * - Updates client state when necessary
+     * - Displays user-readable output
+     */
     private static void processReceive() {
         String receive = new String(packet.getData(), 0, packet.getLength());
         String[] splitReceive = receive.split(":");
