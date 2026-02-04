@@ -13,16 +13,18 @@ public class IntermediateHost {
     private static final Logger logger = LoggerService.getLogger();
     private static final InetAddress SERVER_ADDRESS = ConfigLoader.getInstance().getServerReceiveAddress();
     private static final int SERVER_PORT = ConfigLoader.getInstance().getServerReceivePort();
+    private static InetAddress clientAddress = null, toAddress;
+    private static int clientPort = 0, toPort;
+    private static boolean intermediateHostOn = true;
 
     public static void main(String[] args) {
         logger.info("IntermediateHost start");
         int receivePort = ConfigLoader.getInstance().getIntermediateReceivePort();
-        InetAddress clientAddress = null, toAddress;
-        int clientPort = 0, toPort;
         UdpSocket receiveSocket = new UdpSocket(receivePort);
         UdpSocket sendSocket = new UdpSocket();
+        System.out.println("Battle Royale Host started on port " + receivePort);
 
-        while (true) {
+        while (intermediateHostOn) {
             DatagramPacket packet = receiveSocket.receive();
             if (packet == null) continue;
 
