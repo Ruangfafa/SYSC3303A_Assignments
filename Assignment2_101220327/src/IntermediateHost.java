@@ -13,9 +13,8 @@ public class IntermediateHost {
     private static final Logger logger = LoggerService.getLogger();
     private static final InetAddress SERVER_ADDRESS = ConfigLoader.getInstance().getServerReceiveAddress();
     private static final int SERVER_PORT = ConfigLoader.getInstance().getServerReceivePort();
-    private static InetAddress clientAddress = null, toAddress;
-    private static int clientPort = 0, toPort;
-    private static boolean intermediateHostOn = true;
+    private static InetAddress clientAddress = null;
+    private static int clientPort = 0;
 
     public static void main(String[] args) {
         logger.info("IntermediateHost start");
@@ -24,7 +23,7 @@ public class IntermediateHost {
         UdpSocket sendSocket = new UdpSocket();
         System.out.println("Battle Royale Host started on port " + receivePort + "\n");
 
-        while (intermediateHostOn) {
+        while (true) {
             DatagramPacket packet = receiveSocket.receive();
             if (packet == null) continue;
 
@@ -34,6 +33,14 @@ public class IntermediateHost {
             String receive = new String(packet.getData(), 0, packet.getLength());
             String[] splitReceive = receive.split(":");
 
+            if (splitReceive[0].equals("SHUTDOWN")) {
+                logger.info("IntermediateHost shutdown");
+                System.out.println("IntermediateHost closed.");
+                System.exit(0);
+            }
+
+            int toPort;
+            InetAddress toAddress;
             if (resAddress.equals(SERVER_ADDRESS) && resPort == SERVER_PORT){
                 logger.info("Received: " + Arrays.toString(splitReceive) + ", from Server(" + resAddress + ":" + resPort + ")");
 
