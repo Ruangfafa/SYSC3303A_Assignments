@@ -45,7 +45,7 @@ public class Server {
                     "From host: " + intermediateAddress + "\n" +
                     "From host port: " + intermediatePort + "\n" +
                     "Length: " + intermediatePacket.getLength() + "\n" +
-                    "Containing: " + receive + "\n");
+                    "Containing: " + receive + Arrays.toString(intermediatePacket.getData()) + "\n");
 
             String response = processCommand(gameState, splitReceive);
 
@@ -54,7 +54,7 @@ public class Server {
                     "To host: " + INTERMEDIATE_ADDRESS + "\n" +
                     "To host port: " + INTERMEDIATE_PORT + "\n" +
                     "Length: " + respondIntermediatePacket.getLength() + "\n" +
-                    "Containing: " + response + "\n");
+                    "Containing: " + response + Arrays.toString(respondIntermediatePacket.getData()) + "\n");
 
             udpSocket.sendBack(respondIntermediatePacket);
         }
