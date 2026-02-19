@@ -56,7 +56,7 @@ public class IntermediateHost {
                         "From server: " + resAddress + "\n" +
                         "From server port: " + resPort + "\n" +
                         "Length: " + packet.getLength() + "\n" +
-                        "Containing: " + receive + "\n");
+                        "Containing: " + receive + Arrays.toString(packet.getData()) + "\n");
 
                 toAddress = clientAddress;
                 toPort = clientPort;
@@ -65,7 +65,7 @@ public class IntermediateHost {
                         "To client: " + toAddress + "\n" +
                         "To client port: " + toPort + "\n" +
                         "Length: " + packet.getLength() + "\n" +
-                        "Containing: " + receive + "\n");
+                        "Containing: " + receive + Arrays.toString(packet.getData()) + "\n");
             }
             else {//if get from client
                 clientAddress = packet.getAddress();
@@ -76,7 +76,7 @@ public class IntermediateHost {
                         "From client: " + resAddress + "\n" +
                         "From client port: " + resPort + "\n" +
                         "Length: " + packet.getLength() + "\n" +
-                        "Containing: " + receive + "\n");
+                        "Containing: " + receive + Arrays.toString(packet.getData()) + "\n");
 
                 toAddress = SERVER_ADDRESS;
                 toPort = SERVER_PORT;
@@ -85,7 +85,7 @@ public class IntermediateHost {
                         "To server: local" + toAddress + "\n" +
                         "To server port: " + toPort + "\n" +
                         "Length: " + packet.getLength() + "\n" +
-                        "Containing: " + receive + "\n");
+                        "Containing: " + receive + Arrays.toString(packet.getData()) + "\n");
             }
 
             DatagramPacket intermediatePacket = getPacket(receive, toAddress, toPort);

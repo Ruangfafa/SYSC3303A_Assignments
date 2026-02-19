@@ -53,7 +53,7 @@ public class Client {
                     "To host: local" + INTERMEDIATE_ADDRESS + "\n" +
                     "To host prot: " + INTERMEDIATE_PORT + "\n" +
                     "Length: " + packet.getLength() + "\n" +
-                    "Containing: " + command + "\n");
+                    "Containing: " + command + Arrays.toString(packet.getData()) + "\n");
 
             packet = udpSocket.receive();
             processReceive();
@@ -110,7 +110,7 @@ public class Client {
                 "To host: local" + INTERMEDIATE_ADDRESS + "\n" +
                 "To host prot: " + INTERMEDIATE_PORT + "\n" +
                 "Length: " + packet.getLength() + "\n" +
-                "Containing: " + request + "\n");
+                "Containing: " + request + Arrays.toString(packet.getData()) + "\n");
 
         packet = udpSocket.receive();
         processReceive();
@@ -131,7 +131,7 @@ public class Client {
                 "From host: " + packet.getAddress() + "\n" +
                 "From host port: " + packet.getPort() + "\n" +
                 "Length: " + packet.getLength() + "\n" +
-                "Containing: " + receive);
+                "Containing: " + receive + Arrays.toString(packet.getData()));
         RespondType respondType = RespondType.valueOf(splitReceive[0]);
         switch (respondType) {
             case JOINED ->  {

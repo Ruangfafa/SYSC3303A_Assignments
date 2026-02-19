@@ -56,6 +56,14 @@ public class UdpSocket {
             receiveSocket.receive(receivePacket);
 
             int len = receivePacket.getLength();
+            byte[] trimmedData = new byte[len];
+            System.arraycopy(receivePacket.getData(), 0, trimmedData, 0, len);
+
+            DatagramPacket trimmedPacket =
+                    new DatagramPacket(trimmedData, trimmedData.length,
+                            receivePacket.getAddress(),
+                            receivePacket.getPort());
+
             InetAddress host = receivePacket.getAddress();
             int port = receivePacket.getPort();
             String msg = new String(data, 0, len);
@@ -64,7 +72,7 @@ public class UdpSocket {
             logger.info("Length: " + len);
             logger.info("Containing: " + msg);
 
-            return receivePacket;
+            return trimmedPacket;
         } catch (Exception e) {
             logger.warning("UDP receive failed");
             e.printStackTrace();
