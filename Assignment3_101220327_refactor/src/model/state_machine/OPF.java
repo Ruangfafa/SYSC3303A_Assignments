@@ -35,7 +35,7 @@ public class OPF implements StateMachineInterface {
             pcc.transitionTo(new OCGNP(), EventType.Q_TIMEOUT);
             return;
         }
-        pcc.setPedSignalType((pcc.getPedSignalType() == PedSignalType.DONT_WALK_ON) ? PedSignalType.DONT_WALK_OFF : PedSignalType.DONT_WALK_ON);
+        pcc.setPedSignalType(pcc.getPedSignalType() == PedSignalType.DONT_WALK_ON ? PedSignalType.DONT_WALK_OFF : PedSignalType.DONT_WALK_ON);
     }
 
     @Override

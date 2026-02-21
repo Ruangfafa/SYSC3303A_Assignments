@@ -36,13 +36,6 @@ public class PelicanCrossing implements PelicanCrossingContextInterface {
         }
     }
 
-    public void tick(int n) {
-        for (int i = n; i > 0; i--) {
-            System.out.println("ticked: " + i);
-            dispatch(EventType.Q_TIMEOUT);
-        }
-    }
-
     @Override
     public StateType getStateType() {
         return curState;
