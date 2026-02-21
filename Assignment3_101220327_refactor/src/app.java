@@ -4,6 +4,5 @@ public class app {
     public static void main(String[] args) {
         PelicanCrossing p = new PelicanCrossing();
         System.out.println(p.getStateType());
-        p.tick(1);
     }
 }
