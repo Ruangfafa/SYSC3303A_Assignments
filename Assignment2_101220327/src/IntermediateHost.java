@@ -27,12 +27,11 @@ public class IntermediateHost {
     public static void main(String[] args) {
         logger.info("IntermediateHost start");
         int receivePort = ConfigLoader.getInstance().getIntermediateReceivePort();
-        UdpSocket receiveSocket = new UdpSocket(receivePort);
-        UdpSocket sendSocket = new UdpSocket();
+        UdpSocket udpSocket = new UdpSocket(receivePort);
         System.out.println("Battle Royale Host started on port " + receivePort + "\n");
 
         while (true) {
-            DatagramPacket packet = receiveSocket.receive();
+            DatagramPacket packet = udpSocket.receive();
             if (packet == null) continue;
 
             InetAddress resAddress = packet.getAddress();
@@ -89,7 +88,7 @@ public class IntermediateHost {
             }
 
             DatagramPacket intermediatePacket = getPacket(receive, toAddress, toPort);
-            sendSocket.send(intermediatePacket);
+            udpSocket.send(intermediatePacket);
         }
     }
 }

@@ -1,0 +1,317 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36" version="29.6.0">
+  <diagram name="第 1 页" id="zTgBMkNKyWRnMolidBS7">
+    <mxGraphModel dx="11754" dy="1115" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="10000" pageHeight="10000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="AWVC_hIwk2enqS8azLkw-1" parent="1" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#ff0000;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="185" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-2" edge="1" parent="1" source="AWVC_hIwk2enqS8azLkw-1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="AWVC_hIwk2enqS8azLkw-3" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="135" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-3" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeLast=1;container=0;fontColor=#000000;collapsible=0;rounded=1;arcSize=30;strokeColor=#ff0000;fillColor=#ffffc0;swimlaneFillColor=#ffffc0;dropTarget=0;" value="OPERATIONAL_CARS_GREEN_NO_PED" vertex="1">
+          <mxGeometry height="120" width="240" x="80" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-4" parent="AWVC_hIwk2enqS8azLkw-3" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;fontColor=#000000;" value="enter/&lt;div&gt;CarSignalType.GREEN&lt;div&gt;PedSignalType.DONT_WALK_ON&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="240" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-5" edge="1" parent="1" source="AWVC_hIwk2enqS8azLkw-3" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" target="AWVC_hIwk2enqS8azLkw-7" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="120" y="340" />
+              <mxPoint x="40" y="340" />
+            </Array>
+            <mxPoint x="200" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-48" connectable="0" parent="AWVC_hIwk2enqS8azLkw-5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="onQTimeout()" vertex="1">
+          <mxGeometry relative="1" x="0.425" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-7" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeLast=1;container=0;fontColor=#000000;collapsible=0;rounded=1;arcSize=30;strokeColor=#ff0000;fillColor=#ffffc0;swimlaneFillColor=#ffffc0;dropTarget=0;" value="OPERATIONAL_CARS_GREEN_INT" vertex="1">
+          <mxGeometry height="120" width="240" x="-160" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-8" parent="AWVC_hIwk2enqS8azLkw-7" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;fontColor=#000000;" value="enter/&lt;div&gt;CarSignalType.GREEN&lt;div&gt;PedSignalType.DONT_WALK_ON&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="240" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-9" edge="1" parent="1" source="AWVC_hIwk2enqS8azLkw-7" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" target="AWVC_hIwk2enqS8azLkw-14" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="-40.41999999999996" y="480" as="sourcePoint" />
+            <mxPoint x="-40.41999999999996" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-59" connectable="0" parent="AWVC_hIwk2enqS8azLkw-9" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="onPedsWaiting()" vertex="1">
+          <mxGeometry relative="1" x="-0.15" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-10" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeLast=1;container=0;fontColor=#000000;collapsible=0;rounded=1;arcSize=30;strokeColor=#ff0000;fillColor=#ffffc0;swimlaneFillColor=#ffffc0;dropTarget=0;" value="OPERATIONAL_CARS_GREEN_PED_WAIT" vertex="1">
+          <mxGeometry height="120" width="280" x="320" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-11" parent="AWVC_hIwk2enqS8azLkw-10" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;fontColor=#000000;" value="enter/&lt;div&gt;CarSignalType.GREEN&lt;div&gt;PedSignalType.DONT_WALK_ON&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="280" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-12" edge="1" parent="1" source="AWVC_hIwk2enqS8azLkw-3" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" target="AWVC_hIwk2enqS8azLkw-10" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="280" y="340" />
+              <mxPoint x="360" y="340" />
+            </Array>
+            <mxPoint x="330" y="270" as="sourcePoint" />
+            <mxPoint x="330" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-58" connectable="0" parent="AWVC_hIwk2enqS8azLkw-12" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="onPedsWaiting()" vertex="1">
+          <mxGeometry relative="1" x="0.475" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-14" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeLast=1;container=0;fontColor=#000000;collapsible=0;rounded=1;arcSize=30;strokeColor=#ff0000;fillColor=#ffffc0;swimlaneFillColor=#ffffc0;dropTarget=0;" value="OPERATIONAL_CARS_YELLOW" vertex="1">
+          <mxGeometry height="120" width="240" x="-160" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-15" parent="AWVC_hIwk2enqS8azLkw-14" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;fontColor=#000000;" value="enter/&lt;div&gt;CarSignalType.YELLOW&lt;br&gt;&lt;div&gt;PedSignalType.DONT_WALK_ON&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="240" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-20" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" target="AWVC_hIwk2enqS8azLkw-21" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="-40" y="720" as="sourcePoint" />
+            <mxPoint x="-40.41999999999996" y="750" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-62" connectable="0" parent="AWVC_hIwk2enqS8azLkw-20" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="onQTimeout()" vertex="1">
+          <mxGeometry relative="1" x="-0.2" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-21" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeLast=1;container=0;fontColor=#000000;collapsible=0;rounded=1;arcSize=30;strokeColor=#ff0000;fillColor=#ffffc0;swimlaneFillColor=#ffffc0;dropTarget=0;" value="OPERATIONAL_PEDS_WALK" vertex="1">
+          <mxGeometry height="120" width="240" x="-160" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-22" parent="AWVC_hIwk2enqS8azLkw-21" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;fontColor=#000000;" value="enter/&lt;div&gt;CarSignalType.RED&lt;br&gt;&lt;div&gt;PedSignalType.WALK&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="240" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-23" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" target="AWVC_hIwk2enqS8azLkw-24" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="-40" y="920" as="sourcePoint" />
+            <mxPoint x="-40.41999999999996" y="950" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-63" connectable="0" parent="AWVC_hIwk2enqS8azLkw-23" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="onQTimeout()" vertex="1">
+          <mxGeometry relative="1" x="-0.175" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-24" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeLast=1;container=0;fontColor=#000000;collapsible=0;rounded=1;arcSize=30;strokeColor=#ff0000;fillColor=#ffffc0;swimlaneFillColor=#ffffc0;dropTarget=0;" value="OPERATIONAL_PEDS_FLASH" vertex="1">
+          <mxGeometry height="160" width="240" x="-160" y="1000" as="geometry" />
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-25" parent="AWVC_hIwk2enqS8azLkw-24" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;fontColor=#000000;" value="enter/&lt;div&gt;CarSignalType.RED&lt;br&gt;&lt;div&gt;PedSignalType.DONT_WALK_ON&lt;/div&gt;&lt;/div&gt;&lt;div&gt;do[onQTimeout()[ticker &amp;gt; 0]&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(237, 237, 237));&quot;&gt;]/&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(237, 237, 237));&quot;&gt;PedSignalType will&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(237, 237, 237));&quot;&gt;FLASH&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="240" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-26" edge="1" parent="1" source="AWVC_hIwk2enqS8azLkw-24" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" target="AWVC_hIwk2enqS8azLkw-3" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-410" y="1040" />
+              <mxPoint x="-410" y="240" />
+            </Array>
+            <mxPoint x="-310" y="950" as="sourcePoint" />
+            <mxPoint x="-310" y="1030" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S1Mq5ZBK97oNozELkX-s-1" connectable="0" parent="AWVC_hIwk2enqS8azLkw-26" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="onQTimeout()[ticker &amp;lt;= 0]" vertex="1">
+          <mxGeometry relative="1" x="-0.867" y="-1" as="geometry">
+            <mxPoint x="-38" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-27" edge="1" parent="1" source="AWVC_hIwk2enqS8azLkw-10" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" target="AWVC_hIwk2enqS8azLkw-14" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="460" y="640" />
+            </Array>
+            <mxPoint x="300" y="610" as="sourcePoint" />
+            <mxPoint x="300" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-60" connectable="0" parent="AWVC_hIwk2enqS8azLkw-27" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start; background-color: rgb(27, 29, 30);&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20connectable%3D%220%22%20parent%3D%221%22%20style%3D%22edgeLabel%3Bhtml%3D1%3Balign%3Dcenter%3BverticalAlign%3Dmiddle%3Bresizable%3D0%3Bpoints%3D%5B%5D%3B%22%20value%3D%22onQTimeout()%22%20vertex%3D%221%22%3E%3CmxGeometry%20x%3D%2239%22%20y%3D%22354%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModelon&lt;/span&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.888" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-61" connectable="0" parent="AWVC_hIwk2enqS8azLkw-27" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="onQTimeout()" vertex="1">
+          <mxGeometry relative="1" x="-0.9" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-29" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeLast=1;container=0;fontColor=#000000;collapsible=0;rounded=1;arcSize=30;strokeColor=#ff0000;fillColor=#ffffc0;swimlaneFillColor=#ffffc0;dropTarget=0;" value="OFFLINE_FLASH_ON" vertex="1">
+          <mxGeometry height="120" width="280" x="800" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-30" parent="AWVC_hIwk2enqS8azLkw-29" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;fontColor=#000000;" value="enter/&lt;div&gt;CarSignalType.FLASHING_AMBER_ON&lt;div&gt;PedSignalType.DONT_WALK_ON&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="280" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-31" edge="1" parent="1" source="AWVC_hIwk2enqS8azLkw-3" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" target="AWVC_hIwk2enqS8azLkw-29" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="840" y="280" />
+            </Array>
+            <mxPoint x="760" y="320" as="sourcePoint" />
+            <mxPoint x="810" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-57" connectable="0" parent="AWVC_hIwk2enqS8azLkw-31" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="onOff()" vertex="1">
+          <mxGeometry relative="1" x="-0.7781" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-34" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeLast=1;container=0;fontColor=#000000;collapsible=0;rounded=1;arcSize=30;strokeColor=#ff0000;fillColor=#ffffc0;swimlaneFillColor=#ffffc0;dropTarget=0;" value="OFFLINE_FLASH_OFF" vertex="1">
+          <mxGeometry height="120" width="280" x="800" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-35" parent="AWVC_hIwk2enqS8azLkw-34" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;whiteSpace=wrap;overflow=hidden;rotatable=0;fontColor=#000000;" value="enter/&lt;div&gt;CarSignalType.FLASHING_AMBER_OFF&lt;div&gt;PedSignalType.DONT_WALK_OFF&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="280" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-37" edge="1" parent="1" source="AWVC_hIwk2enqS8azLkw-29" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" target="AWVC_hIwk2enqS8azLkw-34" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="880" y="560" />
+              <mxPoint x="880" y="560" />
+            </Array>
+            <mxPoint x="710" y="650" as="sourcePoint" />
+            <mxPoint x="790" y="730" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S1Mq5ZBK97oNozELkX-s-4" connectable="0" parent="AWVC_hIwk2enqS8azLkw-37" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="onQTimeout()" vertex="1">
+          <mxGeometry relative="1" x="-0.0833" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-38" edge="1" parent="1" source="AWVC_hIwk2enqS8azLkw-34" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" target="AWVC_hIwk2enqS8azLkw-29" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1000" y="580" />
+              <mxPoint x="1000" y="580" />
+            </Array>
+            <mxPoint x="710" y="630" as="sourcePoint" />
+            <mxPoint x="710" y="710" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S1Mq5ZBK97oNozELkX-s-5" connectable="0" parent="AWVC_hIwk2enqS8azLkw-38" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="onQTimeout()" vertex="1">
+          <mxGeometry relative="1" x="0.0333" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-39" edge="1" parent="1" source="AWVC_hIwk2enqS8azLkw-29" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" target="AWVC_hIwk2enqS8azLkw-3" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="940" y="260" />
+            </Array>
+            <mxPoint x="810" y="170" as="sourcePoint" />
+            <mxPoint x="460" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S1Mq5ZBK97oNozELkX-s-2" connectable="0" parent="AWVC_hIwk2enqS8azLkw-39" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="onOn()" vertex="1">
+          <mxGeometry relative="1" x="-0.8965" y="-2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-40" edge="1" parent="1" source="AWVC_hIwk2enqS8azLkw-34" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" target="AWVC_hIwk2enqS8azLkw-3" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1120" y="660" />
+              <mxPoint x="1120" y="240" />
+            </Array>
+            <mxPoint x="1270" y="320" as="sourcePoint" />
+            <mxPoint x="440" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="S1Mq5ZBK97oNozELkX-s-3" connectable="0" parent="AWVC_hIwk2enqS8azLkw-40" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="onOn()" vertex="1">
+          <mxGeometry relative="1" x="-0.8519" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-41" edge="1" parent="1" source="AWVC_hIwk2enqS8azLkw-7" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" target="AWVC_hIwk2enqS8azLkw-29" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="280" y="460" />
+              <mxPoint x="280" y="580" />
+              <mxPoint x="640" y="580" />
+              <mxPoint x="640" y="440" />
+            </Array>
+            <mxPoint x="200" y="850" as="sourcePoint" />
+            <mxPoint x="720" y="970" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-50" connectable="0" parent="AWVC_hIwk2enqS8azLkw-41" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="onOff()" vertex="1">
+          <mxGeometry relative="1" x="-0.851" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-42" edge="1" parent="1" source="AWVC_hIwk2enqS8azLkw-10" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" target="AWVC_hIwk2enqS8azLkw-29" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="700" y="420" />
+              <mxPoint x="700" y="420" />
+            </Array>
+            <mxPoint x="560" y="660" as="sourcePoint" />
+            <mxPoint x="1080" y="780" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-51" connectable="0" parent="AWVC_hIwk2enqS8azLkw-42" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="onOff()" vertex="1">
+          <mxGeometry relative="1" x="-0.43" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-43" edge="1" parent="1" source="AWVC_hIwk2enqS8azLkw-14" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" target="AWVC_hIwk2enqS8azLkw-29" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="680" />
+              <mxPoint x="680" y="460" />
+            </Array>
+            <mxPoint x="530" y="710" as="sourcePoint" />
+            <mxPoint x="1250" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-56" connectable="0" parent="AWVC_hIwk2enqS8azLkw-43" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="onOff()" vertex="1">
+          <mxGeometry relative="1" x="-0.8957" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-44" edge="1" parent="1" source="AWVC_hIwk2enqS8azLkw-21" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" target="AWVC_hIwk2enqS8azLkw-29" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="720" y="840" />
+              <mxPoint x="720" y="480" />
+            </Array>
+            <mxPoint x="430" y="970" as="sourcePoint" />
+            <mxPoint x="1150" y="750" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-53" connectable="0" parent="AWVC_hIwk2enqS8azLkw-44" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="onOff()" vertex="1">
+          <mxGeometry relative="1" x="-0.8796" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-45" edge="1" parent="1" source="AWVC_hIwk2enqS8azLkw-25" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" target="AWVC_hIwk2enqS8azLkw-29" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="80" y="1040" />
+              <mxPoint x="760" y="1040" />
+              <mxPoint x="760" y="500" />
+            </Array>
+            <mxPoint x="410" y="1330" as="sourcePoint" />
+            <mxPoint x="1130" y="970" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWVC_hIwk2enqS8azLkw-55" connectable="0" parent="AWVC_hIwk2enqS8azLkw-45" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="onOff()" vertex="1">
+          <mxGeometry relative="1" x="-0.8986" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
