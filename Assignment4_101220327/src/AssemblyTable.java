@@ -1,3 +1,5 @@
+import java.util.logging.Level;
+
 /**
  * This class is for the assembly table in this Autonomous Drone Assembly Line.
  * The table serves as a common place where components are placed by the agent and taken by the technician.
@@ -18,6 +20,11 @@ public class AssemblyTable {
     private Components[] components = new Components[SIZE];     //List of components on the table
     private boolean tableFull = false;                          //True if there is at least 1 component on the table
     private int dronesMade = 0;                                  //Running total of drones assembled
+    private LoggerService logger;
+
+    public AssemblyTable(LoggerService logger) {
+        this.logger = logger;
+    }
 
     /**
      * Method used to allow an Agent to place components on the table when table is empty
@@ -49,7 +56,7 @@ public class AssemblyTable {
         } catch (InterruptedException e) {}
 
         tableFull = true;   //Table is now full
-        System.out.println("[" + Thread.currentThread().getName() + "] " + components1.toString() + " and " + components2.toString() + " placed on the table.");
+        logger.log(Thread.currentThread().getName(), "INFO", null, components1.toString() + " and " + components2.toString() + " placed on the table.");
         notifyAll();    //Notify all Technicians that table is full
     }
 
@@ -70,12 +77,11 @@ public class AssemblyTable {
                 e.printStackTrace();
             }
         }
-
-        System.out.println("[" + Thread.currentThread().getName() + "] Drone assembled.");
-        System.out.println("[" + Thread.currentThread().getName() + "] Waiting for remaining components...");
+        logger.log(Thread.currentThread().getName(), "INFO", null, "Drone assembled.");
+        logger.log(Thread.currentThread().getName(), "INFO", null, "Waiting for remaining components...");
         this.dronesMade++;  //Increase running total of drones assembled
-        System.out.println("[Counter] Drones assembled: " + this.dronesMade);
-        System.out.println("--------------------------------------------------------------");
+        logger.log(Thread.currentThread().getName(), "FINE", null, "Counter - Drones assembled: " + this.dronesMade);
+        logger.log(Thread.currentThread().getName(), "INFO", null, "--------------------------------------------------------------");
         //Clear components and set table to empty
         this.components[0] = null;
         this.components[1] = null;
@@ -116,8 +122,8 @@ public class AssemblyTable {
      * @param i     Component that Technician will have an infinite supply of
      * @return      Created Technician thread
      */
-    private static Thread makeNewTechnician(AssemblyTable t, Components i){
-        return new Thread(new Technician(t, i), "Technician-" + i.toString());
+    private static Thread makeNewTechnician(AssemblyTable t, Components i, LoggerService logger){
+        return new Thread(new Technician(t, i, logger), "Technician-" + i.toString());
     }
 
     /**
@@ -127,19 +133,32 @@ public class AssemblyTable {
      */
     public static void main (String[] args){
 
+        LoggerService logger = new LoggerService(250,true, Level.ALL, Level.ALL);
+
         Thread TechnicianFrame, TechnicianPropulsion, TechnicianControl, agent;  //Threads for each Technician and the Agent
         AssemblyTable assemblyTable;                                            //Table
 
-        assemblyTable = new AssemblyTable();                                                //Common Table for all Technicians and Agent
-        agent = new Thread(new Agent(assemblyTable), "Agent");                //Agent thread created
-        TechnicianFrame = makeNewTechnician(assemblyTable, Components.Frame);             //Beans Technician created
-        TechnicianPropulsion = makeNewTechnician(assemblyTable, Components.PropulsionUnit);             //Water Technician created
-        TechnicianControl = makeNewTechnician(assemblyTable, Components.ControlFirmware);             //Sugar Technician created
+        assemblyTable = new AssemblyTable(logger);                                                //Common Table for all Technicians and Agent
+        agent = new Thread(new Agent(assemblyTable, logger), "Agent");                //Agent thread created
+        TechnicianFrame = makeNewTechnician(assemblyTable, Components.Frame, logger);             //Beans Technician created
+        TechnicianPropulsion = makeNewTechnician(assemblyTable, Components.PropulsionUnit, logger);             //Water Technician created
+        TechnicianControl = makeNewTechnician(assemblyTable, Components.ControlFirmware, logger);             //Sugar Technician created
 
         //Start all Technician and Agent threads
         TechnicianFrame.start();
         TechnicianPropulsion.start();
         TechnicianControl.start();
         agent.start();
+
+        try {
+            TechnicianFrame.join();
+            TechnicianPropulsion.join();
+            TechnicianControl.join();
+            agent.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        logger.shutdown();
     }
 }
