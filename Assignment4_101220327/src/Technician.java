@@ -14,23 +14,26 @@
 public class Technician implements Runnable {
     private AssemblyTable assemblyTable;                //The common table between Agent and Technicians
     private Components components;      //The only component each instance of Technician has an infinite supply of (this component is different between all three Technicians)
+    private LoggerService logger;
 
     /**
      * Constructor for Technician
      *
-     * @param t     //The common table between Agent and Technicians
-     * @param i     //The component this Technician has an infinite supply of
+     * @param t      //The common table between Agent and Technicians
+     * @param i      //The component this Technician has an infinite supply of
+     * @param logger
      */
-    public Technician(AssemblyTable t, Components i){
+    public Technician(AssemblyTable t, Components i, LoggerService logger){
         this.assemblyTable = t;
         this.components = i;
+        this.logger = logger;
     }
 
     /**
      * Method used for each Technician thread when ran
      */
     public void run(){
-        System.out.println("[" + Thread.currentThread().getName() + "] Waiting for remaining components...");
+        logger.log(Thread.currentThread().getName(), "INFO", null, "Waiting for remaining components...");
         while (this.assemblyTable.getDronesAssembled() != 20){   //Will loop until 20 drones have been assembled
             this.assemblyTable.getComponents(this.components); //Attempts to obtain the missing components for the Technician (if obtained, drone is assembled)
             // Sleep for between 0 and 5 seconds before calculating n!
@@ -40,6 +43,6 @@ public class Technician implements Runnable {
         }
 
         //All drones have been assembled
-        System.out.println("[" + Thread.currentThread().getName() + "] 20 drones assembled, ending...");
+        logger.log(Thread.currentThread().getName(), "INFO", null, "20 drones assembled, ending...");
     }
 }

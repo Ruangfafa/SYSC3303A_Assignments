@@ -13,14 +13,16 @@
 public class Agent implements Runnable {
 
     private AssemblyTable assemblyTable;    //The common table between Agent and Technicians
-
+    private LoggerService logger;
     /**
      * Constructor for Agent
      *
-     * @param t     The common table between Agent and Technicians
+     * @param t      The common table between Agent and Technicians
+     * @param logger
      */
-    public Agent(AssemblyTable t){
+    public Agent(AssemblyTable t, LoggerService logger){
         this.assemblyTable = t;
+        this.logger = logger;
     }
 
     /**
@@ -28,7 +30,7 @@ public class Agent implements Runnable {
      */
     public void run(){
         Components components1, components2;
-        System.out.println("[" + Thread.currentThread().getName() + "] Waiting to place first components on the table...");
+        logger.log(Thread.currentThread().getName(), "INFO", null, "Waiting to place first components on the table...");
         while (this.assemblyTable.getDronesAssembled() != 20){   //Will loop until 20 drones have been assembled
             //Randomly selects two different components
             components1 = Components.getRandomComponent();
@@ -43,6 +45,6 @@ public class Agent implements Runnable {
             } catch (InterruptedException e) {}
         }
         //All drones have been assembled
-        System.out.println("[" + Thread.currentThread().getName() + "] 20 drones assembled, ending...");
+        logger.log(Thread.currentThread().getName(), "INFO", null, "20 drones assembled, ending...");
     }
 }
