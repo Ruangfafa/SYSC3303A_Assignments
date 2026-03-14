@@ -33,7 +33,23 @@ public class AssemblyTable {
      */
     public synchronized void addComponents(Components components1, Components components2) {
         while (tableFull) { //Makes agent wait until table is empty to place components
+            logger.log(
+                    Thread.currentThread().getName(),
+                    "FINE",
+                    new String[]{
+                            "WAIT"
+                    },
+                    "Report Pin"
+            );
             if (this.dronesMade == 20){ //Will exit if no more drones are required to be assembled
+                logger.log(
+                        Thread.currentThread().getName(),
+                        "FINE",
+                        new String[]{
+                                "DONE"
+                        },
+                        "Report Pin"
+                );
                 return;
             }
             try {
@@ -43,9 +59,25 @@ public class AssemblyTable {
             }
         }
         if (this.dronesMade == 20){ //Will exit if no more drones are required to be assembled
+            logger.log(
+                    Thread.currentThread().getName(),
+                    "FINE",
+                    new String[]{
+                            "DONE"
+                    },
+                    "Report Pin"
+            );
             return;
         }
 
+        logger.log(
+                Thread.currentThread().getName(),
+                "FINE",
+                new String[]{
+                        "PLACING_COMPONENTS"
+                },
+                "Report Pin"
+        );
         //Components are placed on table
         components[0] = components1;
         components[1] = components2;
@@ -57,6 +89,24 @@ public class AssemblyTable {
 
         tableFull = true;   //Table is now full
         logger.log(Thread.currentThread().getName(), "INFO", null, components1.toString() + " and " + components2.toString() + " placed on the table.");
+        logger.log(
+                Thread.currentThread().getName(),
+                "FINE",
+                new String[]{
+                        "PLACED_COMPONENTS",
+                        "component1=" + components1,
+                        "component2=" + components2
+                },
+                "Report Pin"
+        );
+        logger.log(
+                Thread.currentThread().getName(),
+                "FINE",
+                new String[]{
+                        "NOTIFY_ALL"
+                },
+                "Report Pin"
+        );
         notifyAll();    //Notify all Technicians that table is full
     }
 
@@ -68,7 +118,23 @@ public class AssemblyTable {
     public synchronized void getComponents(Components components)
     {
         while (!tableFull || componentsContains(components)) { //Makes Technician wait until the table is full and until the two required components from the Agent is available
+            logger.log(
+                    Thread.currentThread().getName(),
+                    "FINE",
+                    new String[]{
+                            "WAIT"
+                    },
+                    "Report Pin"
+            );
             if (this.dronesMade == 20){ //If 20 drones have been assembled, do not assemble another
+                logger.log(
+                        Thread.currentThread().getName(),
+                        "FINE",
+                        new String[]{
+                                "DONE"
+                        },
+                        "Report Pin"
+                );
                 return;
             }
             try {
@@ -77,10 +143,18 @@ public class AssemblyTable {
                 e.printStackTrace();
             }
         }
+        logger.log(
+                Thread.currentThread().getName(),
+                "FINE",
+                new String[]{
+                        "ASSEMBLING"
+                },
+                "Report Pin"
+        );
         logger.log(Thread.currentThread().getName(), "INFO", null, "Drone assembled.");
         logger.log(Thread.currentThread().getName(), "INFO", null, "Waiting for remaining components...");
         this.dronesMade++;  //Increase running total of drones assembled
-        logger.log(Thread.currentThread().getName(), "FINE", null, "Counter - Drones assembled: " + this.dronesMade);
+        logger.log(Thread.currentThread().getName(), "INFO", null, "Counter - Drones assembled: " + this.dronesMade);
         logger.log(Thread.currentThread().getName(), "INFO", null, "--------------------------------------------------------------");
         //Clear components and set table to empty
         this.components[0] = null;
@@ -91,7 +165,22 @@ public class AssemblyTable {
         try {
             Thread.sleep((int)(Math.random() * 1000));
         } catch (InterruptedException e) {}
-
+        logger.log(
+                Thread.currentThread().getName(),
+                "FINE",
+                new String[]{
+                        "ASSEMBLED"
+                },
+                "Report Pin"
+        );
+        logger.log(
+                Thread.currentThread().getName(),
+                "FINE",
+                new String[]{
+                        "NOTIFY_ALL"
+                },
+                "Report Pin"
+        );
         notifyAll();    //Notify Technicians and Agent that components have changed
     }
 
@@ -133,7 +222,7 @@ public class AssemblyTable {
      */
     public static void main (String[] args){
 
-        LoggerService logger = new LoggerService(250,true, Level.ALL, Level.ALL);
+        LoggerService logger = new LoggerService(1000,true, Level.ALL, Level.ALL);
 
         Thread TechnicianFrame, TechnicianPropulsion, TechnicianControl, agent;  //Threads for each Technician and the Agent
         AssemblyTable assemblyTable;                                            //Table
@@ -160,5 +249,6 @@ public class AssemblyTable {
         }
 
         logger.shutdown();
+        ReportGenerator.generateReport("logs/recent.log", "logs/recent_report.txt");
     }
 }
