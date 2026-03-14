@@ -5,7 +5,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.*;
 import java.util.logging.*;
-
+/**
+ * Asynchronous logging service for the drone assembly system.
+ * Collects log messages from threads and periodically flushes them to console and log files.
+ */
 public class LoggerService {
 
     private static class LogModel {
@@ -84,6 +87,14 @@ public class LoggerService {
 
     private LocalDate currentDate;
 
+    /**
+     * Creates a new asynchronous logger.
+     *
+     * @param periodMs flush period in milliseconds
+     * @param enableFile whether file logging is enabled
+     * @param consoleLevel minimum log level for console output
+     * @param fileLevel minimum log level for file output
+     */
     public LoggerService(long periodMs, boolean enableFile, Level consoleLevel, Level fileLevel) {
         this.consoleLevel = consoleLevel;
         this.fileLevel = fileLevel;
@@ -185,6 +196,15 @@ public class LoggerService {
         logger.addHandler(recentFileHandler);
     }
 
+    /**
+     * Adds a log entry to the asynchronous logging queue.
+     *
+     * @param thread the name of the thread generating the log
+     * @param level the log level as a string
+     * @param data optional event data
+     * @param message the log message
+     * @return void
+     */
     public void log(String thread, String level, String[] data, String message) {
         queue.add(new LogModel(
                 thread,
@@ -195,6 +215,11 @@ public class LoggerService {
         ));
     }
 
+    /**
+     * Flushes queued log entries and writes them to console and files.
+     *
+     * @return void
+     */
     private void flush() {
         LogModel e;
 
@@ -214,6 +239,12 @@ public class LoggerService {
         }
     }
 
+    /**
+     * Converts a string log level to a java.util.logging.Level.
+     *
+     * @param level log level string
+     * @return corresponding Level object
+     */
     private Level toLevel(String level) {
         return switch (level) {
             case "INFO" -> Level.INFO;
@@ -226,6 +257,11 @@ public class LoggerService {
         };
     }
 
+    /**
+     * Stops the logger and flushes all remaining log entries.
+     *
+     * @return void
+     */
     public void shutdown() {
         scheduler.shutdownNow();
 
