@@ -205,6 +205,12 @@ public class ReportGenerator {
      * @param out_file output report file path
      * @return void
      */
+    //Agent response time = PLACING_COMPONENTS -> PLACED_COMPONENTS
+    //Technician response time = ASSEMBLING -> ASSEMBLED
+    //WAIT time inside the same cycle
+    //Busy time = sum of valid response times
+    //Wait time = sum of real WAIT intervals
+    //Observed span = first event -> DONE
     public static void generateReport(String in_file, String out_file) {
         try {
             List<String> rawLines = Files.readAllLines(Paths.get(in_file));
@@ -230,7 +236,6 @@ public class ReportGenerator {
                 ThreadStats stats = statsMap.computeIfAbsent(e.thread, ThreadStats::new);
                 stats.seenAt(e.timestamp);
 
-                // A non-WAIT event means the thread has exited its wait interval
                 if (stats.inWait && !"WAIT".equals(e.eventCode)) {
                     stats.endWait(e.timestamp);
                 }
