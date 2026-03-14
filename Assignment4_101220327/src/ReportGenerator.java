@@ -8,7 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+/**
+ * Generates the final execution report for the drone assembly simulation.
+ * Parses the log file and computes statistics such as throughput, response time, and thread activity.
+ */
 public class ReportGenerator {
 
     private static final DateTimeFormatter TS_FORMAT =
@@ -23,6 +26,9 @@ public class ReportGenerator {
 
     private static final Pattern ANSI_PATTERN = Pattern.compile("\u001B\\[[;\\d]*m");
 
+    /**
+     * Stores one parsed log record from the simulation log.
+     */
     private static class LogEntry {
         LocalDateTime timestamp;
         String thread;
@@ -32,6 +38,9 @@ public class ReportGenerator {
         String eventCode;
     }
 
+    /**
+     * Stores execution statistics for one thread.
+     */
     private static class ThreadStats {
         final String name;
 
@@ -57,23 +66,51 @@ public class ReportGenerator {
         int notifyCount = 0;
         Map<String, Integer> rawEventCounts = new LinkedHashMap<>();
 
+        /**
+         * Creates a statistics object for one thread.
+         *
+         * @param name the thread name
+         */
         ThreadStats(String name) {
             this.name = name;
         }
 
+        /**
+         * Updates the first and last observed timestamps for the thread.
+         *
+         * @param ts the observed timestamp
+         * @return void
+         */
         void seenAt(LocalDateTime ts) {
             if (firstSeen == null || ts.isBefore(firstSeen)) firstSeen = ts;
             if (lastSeen == null || ts.isAfter(lastSeen)) lastSeen = ts;
         }
 
+        /**
+         * Returns the effective end time of the thread.
+         *
+         * @return the done time if available, otherwise the last seen time
+         */
         LocalDateTime endTime() {
             return doneTime != null ? doneTime : lastSeen;
         }
 
+        /**
+         * Increments the count for a raw event code.
+         *
+         * @param code the event code
+         * @return void
+         */
         void incRaw(String code) {
             rawEventCounts.merge(code, 1, Integer::sum);
         }
 
+        /**
+         * Marks the start of a wait interval.
+         *
+         * @param ts the wait start time
+         * @return void
+         */
         void startWait(LocalDateTime ts) {
             if (!inWait) {
                 inWait = true;
@@ -81,6 +118,12 @@ public class ReportGenerator {
             }
         }
 
+        /**
+         * Ends the current wait interval and updates wait statistics.
+         *
+         * @param ts the wait end time
+         * @return void
+         */
         void endWait(LocalDateTime ts) {
             if (inWait && waitStart != null) {
                 long ms = Duration.between(waitStart, ts).toMillis();
@@ -97,6 +140,13 @@ public class ReportGenerator {
             }
         }
 
+        /**
+         * Starts a new work cycle for the thread.
+         *
+         * @param type the cycle type
+         * @param ts the cycle start time
+         * @return void
+         */
         void startCycle(String type, LocalDateTime ts) {
             if (cycleStart == null) {
                 currentCycleType = type;
@@ -106,6 +156,12 @@ public class ReportGenerator {
             }
         }
 
+        /**
+         * Finishes the current cycle and records its response time.
+         *
+         * @param ts the cycle end time
+         * @return void
+         */
         void finishCycle(LocalDateTime ts) {
             if (cycleStart == null || cycleFinished) return;
 
@@ -130,6 +186,11 @@ public class ReportGenerator {
             cycleWaitMs = 0L;
         }
 
+        /**
+         * Returns the total observed time span for the thread.
+         *
+         * @return the observed span in milliseconds
+         */
         long observedSpanMs() {
             if (firstSeen == null || endTime() == null) return 0L;
             long ms = Duration.between(firstSeen, endTime()).toMillis();
@@ -137,6 +198,13 @@ public class ReportGenerator {
         }
     }
 
+    /**
+     * Generates a simulation report by parsing a log file.
+     *
+     * @param in_file input log file path
+     * @param out_file output report file path
+     * @return void
+     */
     public static void generateReport(String in_file, String out_file) {
         try {
             List<String> rawLines = Files.readAllLines(Paths.get(in_file));
@@ -286,6 +354,12 @@ public class ReportGenerator {
         }
     }
 
+    /**
+     * Parses a raw log line into a structured LogEntry.
+     *
+     * @param rawLine a single log line
+     * @return parsed LogEntry object, or null if parsing fails
+     */
     private static LogEntry parseLine(String rawLine) {
         if (rawLine == null || rawLine.isBlank()) return null;
 
@@ -313,6 +387,13 @@ public class ReportGenerator {
         return entry;
     }
 
+    /**
+     * Writes text content to the specified output file.
+     *
+     * @param outFile output file path
+     * @param text text to write
+     * @return void
+     */
     private static void writeText(String outFile, String text) throws IOException {
         Path path = Paths.get(outFile);
         Path parent = path.getParent();
@@ -322,6 +403,12 @@ public class ReportGenerator {
         Files.writeString(path, text);
     }
 
+    /**
+     * Converts milliseconds into a formatted duration string.
+     *
+     * @param ms duration in milliseconds
+     * @return formatted duration string
+     */
     private static String formatDuration(long ms) {
         if (ms < 0) ms = 0;
         long hours = ms / 3_600_000;
