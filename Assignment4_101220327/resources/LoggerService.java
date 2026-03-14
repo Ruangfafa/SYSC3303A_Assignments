@@ -80,8 +80,6 @@ public class LoggerService {
 
     private FileHandler fileHandler;
 
-    private FileHandler recentFileHandler;
-
     private LocalDate currentDate;
 
     public LoggerService(long periodMs, boolean enableFile, Level consoleLevel, Level fileLevel) {
@@ -98,7 +96,6 @@ public class LoggerService {
         if (enableFile) {
             try {
                 rotateFileIfNeeded();
-                setupRecentFileHandler();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -145,13 +142,17 @@ public class LoggerService {
         }
 
         Path logDir = Paths.get("logs");
+
         Files.createDirectories(logDir);
 
         String filename = today + ".log";
+
         Path logFile = logDir.resolve(filename);
 
         fileHandler = new FileHandler(logFile.toString(), true);
+
         fileHandler.setLevel(fileLevel);
+
         fileHandler.setFormatter(new Formatter() {
             @Override
             public String format(LogRecord record) {
@@ -160,29 +161,6 @@ public class LoggerService {
         });
 
         logger.addHandler(fileHandler);
-    }
-
-    private void setupRecentFileHandler() throws IOException {
-        if (recentFileHandler != null) {
-            recentFileHandler.close();
-            logger.removeHandler(recentFileHandler);
-        }
-
-        Path logDir = Paths.get("logs");
-        Files.createDirectories(logDir);
-
-        Path recentLogFile = logDir.resolve("recent.log");
-
-        recentFileHandler = new FileHandler(recentLogFile.toString(), false);
-        recentFileHandler.setLevel(fileLevel);
-        recentFileHandler.setFormatter(new Formatter() {
-            @Override
-            public String format(LogRecord record) {
-                return record.getMessage() + "\n";
-            }
-        });
-
-        logger.addHandler(recentFileHandler);
     }
 
     public void log(String thread, String level, String[] data, String message) {
@@ -233,10 +211,6 @@ public class LoggerService {
 
         if (fileHandler != null) {
             fileHandler.close();
-        }
-
-        if (recentFileHandler != null) {
-            recentFileHandler.close();
         }
     }
 }
