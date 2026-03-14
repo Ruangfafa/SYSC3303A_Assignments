@@ -33,6 +33,10 @@ Assignment4_101220327/
 │ └── Technician.java
 ├── resources/
 │ └── ...
+├── logs/
+│ ├── recent.log (generate after first run)
+│ ├── recent_report.txt (generate after first run)
+│ └── ... (date logs)
 └── README.md
 ```
 
