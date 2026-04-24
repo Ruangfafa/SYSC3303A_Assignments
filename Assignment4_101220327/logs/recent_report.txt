@@ -1,0 +1,55 @@
+Drone Assembly Line Report
+============================================================
+Start time          : 2026-03-14 17:22:41.978
+End time            : 2026-03-14 17:23:28.007
+Total execution time: 00h:00m:46s.029
+Total drones        : 20
+Throughput          : 0.4345 drones/second
+------------------------------------------------------------
+Technician-PropulsionUnit
+  ASSEMBLED count   : 7
+  PLACED count      : 0
+  Average Response time      : 526.14 ms
+  Minimum Response time      : 112 ms
+  Maximum Response time      : 893 ms
+  Busy time         : 00h:00m:03s.683 (3683 ms)
+  Wait time         : 00h:00m:16s.912 (16912 ms)
+  Observed span     : 00h:00m:43s.614 (43614 ms)
+  Utilization       : 8.44%
+  Busy/(Busy+Wait)  : 17.88%
+------------------------------------------------------------
+Technician-ControlFirmware
+  ASSEMBLED count   : 6
+  PLACED count      : 0
+  Average Response time      : 558.50 ms
+  Minimum Response time      : 18 ms
+  Maximum Response time      : 902 ms
+  Busy time         : 00h:00m:03s.351 (3351 ms)
+  Wait time         : 00h:00m:29s.903 (29903 ms)
+  Observed span     : 00h:00m:43s.614 (43614 ms)
+  Utilization       : 7.68%
+  Busy/(Busy+Wait)  : 10.08%
+------------------------------------------------------------
+Agent
+  ASSEMBLED count   : 0
+  PLACED count      : 20
+  Average Response time      : 426.55 ms
+  Minimum Response time      : 55 ms
+  Maximum Response time      : 944 ms
+  Busy time         : 00h:00m:08s.531 (8531 ms)
+  Wait time         : 00h:00m:06s.527 (6527 ms)
+  Observed span     : 00h:00m:45s.155 (45155 ms)
+  Utilization       : 18.89%
+  Busy/(Busy+Wait)  : 56.65%
+------------------------------------------------------------
+Technician-Frame
+  ASSEMBLED count   : 7
+  PLACED count      : 0
+  Average Response time      : 485.43 ms
+  Minimum Response time      : 53 ms
+  Maximum Response time      : 941 ms
+  Busy time         : 00h:00m:03s.398 (3398 ms)
+  Wait time         : 00h:00m:25s.771 (25771 ms)
+  Observed span     : 00h:00m:46s.029 (46029 ms)
+  Utilization       : 7.38%
+  Busy/(Busy+Wait)  : 11.65%
